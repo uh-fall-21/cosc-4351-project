@@ -2,10 +2,36 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const app = express();
 
+// The following middleware is needed to handle POST requests
+// Recognizes the incoming object as a JSON OBJECT
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+app.use(cookieParser());
+// Recognizes the incoming object as strings or arrays
+app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60*60*24
+    }
+}));
 
 const db = mysql.createConnection({
     user: "admin",
@@ -14,41 +40,61 @@ const db = mysql.createConnection({
     database: "restaurant",
 });
 
-db.connect(function(err) {
+db.connect(function (err) {
     if (err) throw err;
     db.query("SELECT * FROM Login", function (err, result, fields) {
-      if (err) throw err;
-      console.log(result);
+        if (err) throw err;
+        console.log(result);
     });
 });
 
 app.post('/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-
-    db.query("INSERT INTO Login (username, password) VALUES (?,?)", 
-    [username, password],
-    (err, result) => {
-        console.log(err);
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        if (err) {
+            console.log(err);
+        }
+        db.query("INSERT INTO Login (username, password) VALUES (?,?)",
+            [username, hash],
+            (err, result) => {
+                console.log(err);
+            });
     });
 });
+
+app.get("/login", (req, res) => {
+    if (req.session.user) {
+        res.send({loggedIn: true, user: req.session.user});
+    } else {
+        res.send({loggedIn: false});
+    }
+})
 
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    db.query("SELECT * FROM Login WHERE username = ? AND password = ?", 
-    [username, password],
-    (err, result) => {
-        if (err) {
-            res.send({err: err});
-        } 
-        if (result.length > 0) {
-            res.send(result);
-        } else {
-            res.send({message: "Wrong username/password combination!"});
-        }
-    });
+    db.query("SELECT * FROM Login WHERE username = ?",
+        username,
+        (err, result) => {
+            if (err) {
+                res.send({ err: err });
+            }
+            if (result.length > 0) {
+                bcrypt.compare(password, result[0].password, (error, response) => {
+                    if (response) {
+                        req.session.user = result;
+                        console.log(req.session.user);
+                        res.send(result);
+                    } else {
+                        res.send({ message: "Wrong username/password combination!" });        
+                    }
+                })
+            } else {
+                res.send({ message: "User doesn't exist" });
+            }
+        });
 })
 
 app.listen(3001, () => {
