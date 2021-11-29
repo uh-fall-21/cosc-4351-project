@@ -48,6 +48,7 @@ function App() {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, status: false });
     <Redirect to="/login"></Redirect>;
+    window.location.reload(false);
   };
 
   return (
