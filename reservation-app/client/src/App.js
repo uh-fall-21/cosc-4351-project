@@ -67,6 +67,7 @@ function App() {
                   <Link to="/"> Home Page</Link>
                   <Link to="/createpost"> Create A Reservation</Link>
                   <Link to="/account"> Account</Link>
+                  {/* <Link to="/profile"> Profile</Link> */}
                 </>
               )}
             </div>
@@ -83,6 +84,7 @@ function App() {
             <Route path="/profile/:id" exact component={Profile} />
             <Route path="/changepassword" exact component={ChangePassword} />
             <Route path="/account" exact component={Account} />
+            {/* <Route path="/profile" exact component={Profile}/> */}
             <Route path="*" exact component={PageNotFound} />
           </Switch>
         </Router>

@@ -5,8 +5,11 @@ const bcryptjs = require("bcryptjs");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 const {uuid} = require("uuidv4");
-
-
+/*
+router.get("/accinfo", validateToken, async (req, res) => {
+  const userinfo = await Likes.findAll({ where: { UserId: req.user.id } });
+  res.json(userinfo);
+});*/
 
 router.post("/", async (req, res) => {
   const { username, password } = req.body;

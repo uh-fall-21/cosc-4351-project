@@ -8,9 +8,11 @@ import { AuthContext } from "../helpers/AuthContext";
 function Account() {
 
   let { id } = useParams();
+
+  let history = useHistory();
   const [username, setUsername] = useState("");
 
-  const [listOfPosts, setListOfPosts] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
 
@@ -22,21 +24,7 @@ function Account() {
   const [newWage, setNewWage] = useState(0);
   const [employeeList, setEmployeeList] = useState([]);
 
-  let history = useHistory();
 
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      history.push("/login");
-    } else {
-      axios
-        .get("http://localhost:3001/posts", {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        })
-        .then((response) => {
-          setListOfPosts(response.data.listOfPosts);
-        });
-    }
-  }, []);
 /*
   useEffect(() => {
     axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
@@ -46,7 +34,21 @@ function Account() {
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
       setListOfPosts(response.data);
     });
-  }, []);  */
+  }, []); */
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/login");
+    } else {
+      axios
+        .get("http://localhost:3001/auth/accinfo", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          setUserInfo(response.data.userInfo);
+        });
+    }
+  }, []); 
 ///////////////////////////
 const addEmployee = () => {
   axios.post("http://localhost:3001/create", {
@@ -80,7 +82,7 @@ const updateEmployeeWage = (id) => {
     (response) => {
       setEmployeeList(
         employeeList.map((val) => {
-          return val.id == id
+          return val.id === id
             ? {
                 id: val.id,
                 name: val.name,
@@ -108,7 +110,9 @@ const deleteEmployee = (id) => {
 
 ///////////////////////////
   return (
+    
     <div className="App">
+      <h1>{authState.username} </h1>
       <div className="information">
         <label>Name:</label>
         <input
@@ -158,15 +162,19 @@ const deleteEmployee = (id) => {
       <div className="employees">
         <button onClick={getEmployees}>Show Employees</button>
 
+
+
+
         {employeeList.map((val, key) => {
           return (
             <div className="employee">
               <div>
                 <h3>Name: {val.name}</h3>
-                <h3>Age: {val.age}</h3>
-                <h3>Country: {val.country}</h3>
-                <h3>Position: {val.position}</h3>
-                <h3>Wage: {val.wage}</h3>
+                <h3>Address: {val.address}</h3>
+                <h3>Billing Address: {val.billingAddress}</h3>
+                <h3>Preferred Dinner Number: {val.preferredDinnerNum}</h3>
+                <h3>Points: {val.points}</h3>
+                <h3>Payment Method: {val.preferredPayMethod}</h3>
               </div>
               <div>
                 <input
