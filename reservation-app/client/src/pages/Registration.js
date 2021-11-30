@@ -1,4 +1,6 @@
 import React from "react";
+//import { Redirect } from "react-router-dom";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -18,6 +20,7 @@ function Registration() {
     axios.post("http://localhost:3001/auth", data).then(() => {
       console.log(data);
     });
+    // <Redirect to="/login"></Redirect>;
   };
 
   return (
