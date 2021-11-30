@@ -57,7 +57,7 @@ function CreatePost() {
             name="postText"
           />
 
-          <button type="submit"> Create Post</button>
+          <button type="submit" id = "createPost"> Create Post</button>
         </Form>
       </Formik>
     </div>
