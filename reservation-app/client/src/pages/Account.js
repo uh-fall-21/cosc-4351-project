@@ -19,7 +19,6 @@ function Account() {
   const [newName, setName] = useState("");
   const [newAddress, setAddress] = useState("");
   const [newBillingAddress, setBillingAddress] = useState("");
-  const [newPoints, setPoints] = useState(0);
   const [newPreferredPayMethod, setPreferredPayMethod] = useState("");
 
 
@@ -40,10 +39,10 @@ function Account() {
   const updateAccount = () => {
     axios.put("http://localhost:3001/auth/updateaccount",
     {
-      name: newName,
-      address: newAddress,
-      billingAddress: newBillingAddress,
-      preferredPayMethod: newPreferredPayMethod,
+      newName: newName,
+      newAddress: newAddress,
+      newBillingAddress: newBillingAddress,
+      newPreferredPayMethod: newPreferredPayMethod,
     },
     {
       headers: {

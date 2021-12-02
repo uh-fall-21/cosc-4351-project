@@ -8,15 +8,15 @@ app.use(cors());
 
 const db = require("./models");
 
-app.get("/employees", (req, res) => {
-  db.sequelize.query("SELECT * FROM Users", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
+// app.get("/employees", (req, res) => {
+//   db.sequelize.query("SELECT * FROM Users", (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
 
 // Routers
 const postRouter = require("./routes/Posts");
