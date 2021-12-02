@@ -37,14 +37,14 @@ function Account() {
     return (
       <div key={key} className="post">
         <div>
-                <h3>Name: <textarea placeholder class = "pholder"> John Doe</textarea>{value.name}  </h3>
-                <h3>Address: <textarea placeholder class = "pholder"> 123 Doeing Lane</textarea>{value.address}</h3>
+                <h3>Name: {value.name}<textarea placeholder class = "pholder"> John Doe</textarea></h3>
+                <h3>Address: {value.address}<textarea placeholder class = "pholder"> 123 Doeing Lane</textarea></h3>
                 <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input>
                 <label for="vehicle1"> Billing address is same as Mailing address</label>
-                <h3>Billing Address: <textarea placeholder class = "pholder"> 123 Doeing Lane</textarea>{value.billingAddress}</h3>
+                <h3>Billing Address: {value.billingAddress}<textarea placeholder class = "pholder"> 123 Doeing Lane</textarea></h3>
                 <h3>Preferred Dinner Number: {value.preferredDinnerNum}</h3>
-                <h3>Points: <textarea placeholder class = "pholder"> 0</textarea>{value.points}</h3>
-                <h3>Payment Method: <textarea placeholder class = "pholder"> Cash/Credit</textarea>{value.preferredPayMethod}</h3>
+                <h3>Points: {value.points}<textarea placeholder class = "pholder"> 0</textarea></h3>
+                <h3>Payment Method: {value.preferredPayMethod}<textarea placeholder class = "pholder"> </textarea></h3>
               </div>
       </div>
     );
