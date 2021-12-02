@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Users } = require("../models");
+const { Users, sequelize } = require("../models");
 const bcryptjs = require("bcryptjs");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
@@ -72,5 +72,37 @@ router.put("/changepassword", validateToken, async (req, res) => {
     });
   });
 });
+/*
+router.put("/updateaccount", validateToken, async (req, res) => {
+  const {newName, newAddress, newBillingAddress, newPreferredPayMethod } = req.body;
+  const user = await Users.findOne({ where: { Id: req.user.id } });
+  Users.update(
+    {
+      name: newName,
+      address: newAddress,
+      billingAddress: newBillingAddress,
+      preferredPayMethod: newPreferredPayMethod,
+    },
+    { where: { username: req.user.username} }
+  );
+  res.json("SUCCESS");
+});
+*/
+
+router.put("/updateaccount", validateToken, async (req, res) => {
+  const {newName, newAddress, newBillingAddress, newPreferredPayMethod } = req.body;
+  const user = await Users.findOne({ where: { Id: req.user.id } });
+  Users.update({
+      name: newName,
+      address: newAddress,
+      billingAddress: newBillingAddress,
+      preferredPayMethod: newPreferredPayMethod
+    },
+    { where: { username: req.user.username} }
+  );
+  //await Users.save();
+  res.json("SUCCESS");
+});
+
 
 module.exports = router;

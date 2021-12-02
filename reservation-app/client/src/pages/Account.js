@@ -15,6 +15,12 @@ function Account() {
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
   const [employeeList, setEmployeeList] = useState([]);
+  
+  const [newName, setName] = useState("");
+  const [newAddress, setAddress] = useState("");
+  const [newBillingAddress, setBillingAddress] = useState("");
+  const [newPoints, setPoints] = useState(0);
+  const [newPreferredPayMethod, setPreferredPayMethod] = useState("");
 
 
   useEffect(() => {
@@ -29,7 +35,28 @@ function Account() {
           setEmployeeList(response.data);
         });
     } 
-  }, []); 
+  }, []);
+
+  const updateAccount = () => {
+    axios.put("http://localhost:3001/auth/updateaccount",
+    {
+      name: newName,
+      address: newAddress,
+      billingAddress: newBillingAddress,
+      preferredPayMethod: newPreferredPayMethod,
+    },
+    {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }
+    )
+    .then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      }
+    });
+  };
 
   return (
     <div>
@@ -37,15 +64,56 @@ function Account() {
     return (
       <div key={key} className="post">
         <div>
-                <h3>Name: {value.name}<textarea placeholder class = "pholder"> John Doe</textarea></h3>
-                <h3>Address: {value.address}<textarea placeholder class = "pholder"> 123 Doeing Lane</textarea></h3>
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input>
-                <label for="vehicle1"> Billing address is same as Mailing address</label>
-                <h3>Billing Address: {value.billingAddress}<textarea placeholder class = "pholder"> 123 Doeing Lane</textarea></h3>
-                <h3>Preferred Dinner Number: {value.preferredDinnerNum}</h3>
-                <h3>Points: {value.points}<textarea placeholder class = "pholder"> 0</textarea></h3>
-                <h3>Payment Method: {value.preferredPayMethod}<textarea placeholder class = "pholder"> </textarea></h3>
-              </div>
+          <h3>NAME: {value.name}</h3>
+          <h3>ADDRESS: {value.address}</h3>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input>
+          <label for="vehicle1"> Billing address is same as Mailing address</label>
+          <h3>BILLING ADDRESS: {value.billingAddress}</h3>
+          <h3>PREFERRED DINNER NUMBER: {value.preferredDinnerNum}</h3>
+          <h3>POINTS: {value.points}</h3>
+          <h3>PAYMENT METHOD: {value.preferredPayMethod}</h3>
+        </div>
+        <body styles="background-color:powderblue;">
+        <h1>UPDATE BELOW</h1>
+        </body>
+        <div>
+        <input
+                  type="text"
+                  placeholder="name"
+                  onChange={(event) => {
+                    setName(event.target.value);
+                  }}/>
+        </div>
+        <div>
+        <input
+                  type="text"
+                  placeholder="address"
+                  onChange={(event) => {
+                    setAddress(event.target.value);
+                  }}/>
+        </div>
+        <div>
+        <input
+                  type="text"
+                  placeholder="billing address"
+                  onChange={(event) => {
+                    setBillingAddress(event.target.value);
+                  }}/>
+        </div>
+        <div>
+        <input
+                  type="text"
+                  placeholder="cash / credit / check"
+                  onChange={(event) => {
+                    setPreferredPayMethod(event.target.value);
+                  }}/>
+        </div>
+        <button
+          onClick={() => {
+            updateAccount();
+          }}>
+          Update
+        </button>
       </div>
     );
   })}
