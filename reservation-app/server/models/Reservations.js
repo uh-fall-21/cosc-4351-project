@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       datetime: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: true,
       },
       guestCount: {
