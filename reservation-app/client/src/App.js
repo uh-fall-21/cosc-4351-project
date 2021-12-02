@@ -50,6 +50,8 @@ function App() {
     <Redirect to="/login"></Redirect>;
     window.location.reload(false);
   };
+  
+let currentUser = authState.username;
 
   return (
     <div className="App">
@@ -57,19 +59,24 @@ function App() {
         <Router>
           <div className="navbar">
             <div className="links">
-              {!authState.status ? (
-                <>
-                  <Link to="/login"> Login</Link>
-                  <Link to="/registration"> Registration</Link>
-                </>
-              ) : (
-                <>
-                  <Link to="/"> Home Page</Link>
-                  <Link to="/createpost"> Create A Reservation</Link>
-                  <Link to="/account"> Account</Link>
-                  {/* <Link to="/profile"> Profile</Link> */}
-                </>
-              )}
+            { !authState.status ? (
+    <>
+      <Link to="/login"> Login</Link>
+      <Link to="/registration"> Registration</Link>
+    </>
+  ) : (
+    currentUser = 'guest' ? (
+    <>
+      <Link to="/"> Home Page</Link>
+      <Link to="/createpost"> Create A Reservation</Link>
+    </>
+  ) : (
+    <>
+      <Link to="/"> Home Page</Link>
+      <Link to="/createpost"> Create A Reservation</Link>
+      <Link to="/account"> Account</Link>
+    </>
+  ))}
             </div>
             <div className="loggedInContainer">
               <h1>{authState.username} </h1>
