@@ -65,10 +65,10 @@ let currentUser = authState.username;
       <Link to="/registration"> Registration</Link>
     </>
   ) : (
-    currentUser = 'guest' ? (
+    currentUser=="guest" ? (
     <>
       <Link to="/"> Home Page</Link>
-      <Link to="/createpost"> Create A Reservation</Link>
+      <Link to="/createpost"> Create A Reservation </Link>
     </>
   ) : (
     <>
