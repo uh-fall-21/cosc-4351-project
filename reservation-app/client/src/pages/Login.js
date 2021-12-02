@@ -26,6 +26,27 @@ function Login() {
       }
     });
   };
+
+  const guestLogin = () => {
+    let usernameG = 'guest';
+    let passwordG = 'password';
+    const data = { username: usernameG, password: passwordG };
+    axios.post("http://localhost:3001/auth/login", data).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        localStorage.setItem("accessToken", response.data.token);
+        setAuthState({
+          username: response.data.username,
+          id: response.data.id,
+          status: true,
+        });
+        history.push("/");
+      }
+    });
+  };
+
+
   return (
     <div className="loginContainer">
       <label> <h2>Username: </h2></label>
@@ -42,10 +63,8 @@ function Login() {
           setPassword(event.target.value);
         }}
       />
-
       <button onClick={login}> Login </button>
-
-      <a href = "#"> Forgot Password </a>
+      <button onClick={guestLogin}> Continue as Guest </button>
     </div>
   );
 }
