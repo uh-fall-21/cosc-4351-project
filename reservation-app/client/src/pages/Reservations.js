@@ -29,12 +29,26 @@ function Reservations() {
         return (
           <div key={key} className="post">
             <div className="title"> Reservation </div>
-            <div>
-              {value.name}
-              {value.phone}
-              {value.email}
-              {value.datetime}
-              {value.guestCount}
+            <div id = "reservation_details">
+              <p id = "res_name">
+              Name on Reservation: {value.name}
+              </p>
+              <p className = "res_details">
+              Phone number: {value.phone}
+              </p>
+              <br></br>
+              <p className = "res_details">
+              Email: {value.email}
+              </p>
+              <br></br>
+
+              <p className = "res_details">
+              Time signed up: {value.datetime}
+              </p>
+              <br></br>
+              How many guests: {value.guestCount}
+              <p></p>
+              
             </div>
             <div className="footer">
               <div className="username">
