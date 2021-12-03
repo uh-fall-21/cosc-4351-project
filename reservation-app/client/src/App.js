@@ -10,6 +10,7 @@ import ChangePassword from "./pages/ChangePassword";
 import Account from "./pages/Account";
 import Reservations from "./pages/Reservations";
 import CreateReservation from "./pages/CreateReservation";
+import CreateReservation2 from "./pages/CreateReservation2";
 
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from "react";
@@ -77,7 +78,7 @@ let currentUser = authState.username;
       <Link to="/"> Home Page</Link>
       <Link to="/createpost"> Create A Reservation</Link>
       <Link to="/account"> Account</Link>
-      <Link to="/createreservation"> Create a Reservation </Link>
+      <Link to="/createreservation2"> New Reservation </Link>
       <Link to="/reservations"> My Reservations</Link>
     </>
   ))}
@@ -96,7 +97,7 @@ let currentUser = authState.username;
             <Route path="/changepassword" exact component={ChangePassword} />
             <Route path="/account" exact component={Account} />
             <Route path="/reservations" exact component={Reservations} />
-            <Route path="/createreservation" exact component={CreateReservation} />
+            <Route path="/createreservation2" exact component={CreateReservation2} />
             <Route path="*" exact component={PageNotFound} />
           </Switch>
         </Router>
