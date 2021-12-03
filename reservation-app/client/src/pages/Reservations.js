@@ -52,7 +52,7 @@ function Reservations() {
             </div>
             <div className="footer">
               <div className="username">
-                {value.username}
+                {/* {value.username} */}
               </div>
             </div>
           </div>

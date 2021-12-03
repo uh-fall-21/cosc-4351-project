@@ -64,14 +64,51 @@ function Reservation2() {
       var dateCheck = newDatetime.toString();
       var dateCheck2 = dateCheck.slice(5,10);
       
-      if (dateCheck2 = '12-25'){
+      if (dateCheck2 == '12-25'){
         alert("Christmas is a busy day, hold fee required. $10 cancellation fee");
       }
-      else if (dateCheck2 = '07-04'){
+      else if (dateCheck2 == '07-04'){
           alert("Fourth of July is a busy, hold fee required. $10 cancellation fee");
       }
       else return 0;
   };
+
+  function tableCheck(){
+    var x = newGuestCount;
+    if(x==1)
+      alert(" 1 Table of 2 has been reserved!");
+    if(x==2)
+      alert(" 1 Table of 2 has been reserved!");
+    if(x==3)
+      alert(" 1 Table of 4 has been reserved!");
+    if(x==4)
+      alert(" 1 Table of 4 has been reserved!");
+    if(x==5)
+      alert(" 1 Table of 6 has been reserved!");
+    if(x==6)
+      alert(" 1 Table of 6 has been reserved!!");
+    if(x==7)
+      alert(" 1 Table of 8 has been reserved!!");
+    if(x==8)
+      alert(" 1 Table of 8 has been reserved!!");
+    if(x==9)
+      alert(" 1 Table of 6 and 1 Table of 4 has been reserved!!");
+    if(x==10)
+      alert(" 1 Table of 6 and 1 Table of 4 has been reserved!!");
+    if(x==11)
+      alert(" 1 Table of 8 and 1 Table of 4 has been reserved!!");
+    if(x==12)
+      alert(" 1 Table of 8 and 1 Table of 4 has been reserved!!");
+    if(x==13)
+      alert(" 1 Table of 8 and 1 Table of 6 has been reserved!!");
+    if(x==14)
+      alert(" 1 Table of 8 and 1 Table of 6 has been reserved!!");
+    if(x==15)
+      alert(" 2 Tables of 8 have been reserved!!");
+    if(x==16)
+      alert(" 2 Tables of 8 have been reserved!!");
+    };
+    
 
   return (
     <div>
@@ -125,6 +162,7 @@ function Reservation2() {
           onClick={() => {
             createNewReservation();
             checkBusyDate();
+            tableCheck();
           }}>
           SUBMIT
         </button>
@@ -133,6 +171,6 @@ function Reservation2() {
   })}
       </div>
   );
-}
+};
 
 export default Reservation2;

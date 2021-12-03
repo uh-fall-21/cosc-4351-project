@@ -5,7 +5,8 @@ const { Reservations } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.get("/", validateToken, async (req, res) => {
-  const listOfReservations = await Reservations.findAll({ where: { username: 'mlopez'}});//{ Id: req.user.id }});
+  const listOfReservations = await Reservations.findAll({ where: { Id: req.user.id }});
+  //const listOfReservations = await Reservations.findAll({ where: { username: 'mlopez2'}});
   res.json({ listOfReservations});
 });
 
