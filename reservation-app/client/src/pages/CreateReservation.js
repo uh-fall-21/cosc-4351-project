@@ -27,8 +27,8 @@ function CreateReservation() {
     name: Yup.string().required("You must input a Title!"),
     phone: Yup.string().required(),
     email: Yup.string().required(),
-    datetime: Yup.datetime().required(),
-    guestCount: Yup.integer().required(),
+    datetime: Yup.date().required(),
+    guestCount: Yup.number().required(),
   });
 
   const onSubmit = (data) => {
@@ -49,14 +49,35 @@ function CreateReservation() {
         validationSchema={validationSchema}
       >
         <Form className="formContainer">
-          <label>Number of Guests: </label>
-          <ErrorMessage name="title" component="span" />
+          <label>Name: </label>
+          <ErrorMessage name="name" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="title"
+            name="name"
           />
-          <label>Reservation Info: </label>
+          <label>Phone: </label>
+          <ErrorMessage name="phone" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="phone"
+          />
+          <label>Email: </label>
+          <ErrorMessage name="email" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="email"
+          />
+          <label>Date and Time: </label>
+          <ErrorMessage name="postText" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="postText"
+          />
+          <label>Total Guests: </label>
           <ErrorMessage name="postText" component="span" />
           <Field
             autocomplete="off"
