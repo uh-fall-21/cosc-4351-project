@@ -19,14 +19,14 @@ const db = require("./models");
 // });
 
 // Routers
+const reservationsRouter = require("./routes/Reservations");
+app.use("/reservations", reservationsRouter);
 const postRouter = require("./routes/Posts");
 app.use("/posts", postRouter);
 const usersRouter = require("./routes/Users");
 const { sequelize } = require("./models");
 app.use("/auth", usersRouter);
 
-const reservationsRouter = require("./routes/Reservations");
-app.use("/reservations", reservationsRouter);
 
 
 db.sequelize.sync().then(() => {

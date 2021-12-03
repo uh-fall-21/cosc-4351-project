@@ -10,11 +10,11 @@ function CreateReservation() {
 
   let history = useHistory();
   const initialValues = {
-    name: "",
-    phone: "",
-    email: "",
-    datetime: "", //might need fix
-    guestCount: 0, //might need int
+    name: "martin2",
+    phone: "666777888",
+    email: "code.mlopez",
+    datetime: "07141994", //might need fix
+    guestCount: 55, //might need int
 
   };
 
@@ -33,7 +33,7 @@ function CreateReservation() {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:3001/posts", data, {
+      .post("http://localhost:3001/reservations", data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
@@ -71,18 +71,18 @@ function CreateReservation() {
             name="email"
           />
           <label>Date and Time: </label>
-          <ErrorMessage name="postText" component="span" />
+          <ErrorMessage name="datetime" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="postText"
+            name="datetime"
           />
           <label>Total Guests: </label>
-          <ErrorMessage name="postText" component="span" />
+          <ErrorMessage name="guestCount" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="postText"
+            name="guestCount"
           />
 
           <button type="submit" id = "createPost"> Create Post</button>
