@@ -25,16 +25,29 @@ body {
   padding: 0;
   background-color:#6abadeba;  
     font-family: 'Arial'; 
+    background-image: url("https://wallpaperaccess.com/full/3353887.jpg");
 }
 
 #createPost{
   background-color: black;
 }
 
+input[type=text]:focus {
+  width: 100%;
+}
+input[type=text]{
+  width:50%;
+  transition: width 0.4s ease-in-out;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border:none;
+  border-bottom: 2px solid black;
+}
 .post {
   width: 400px;
-  height: 500px;
-  background-color: rgb(209, 209, 49);
+  height: 800px;
+  background-color: rgb(57, 160, 79);
   border-radius: 10px;
   display: flex;
   flex-direction: column; 

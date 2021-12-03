@@ -30,6 +30,7 @@ function Home() {
       {listOfPosts.map((value, key) => {
         return (
           <div key={key} className="post">
+            
             <div className="title"> {value.title} </div>
             <div
               className="body"
@@ -41,6 +42,7 @@ function Home() {
             </div>
             <div className="footer">
               <div className="username">
+                
                 <Link to={`/profile/${value.UserId}`}> {value.username} </Link>
               </div>
             </div>
