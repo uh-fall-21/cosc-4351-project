@@ -59,20 +59,27 @@ function Reservation2() {
     });
   };
 
+  function checkBusyDate() {
+      
+      var dateCheck = newDatetime.toString();
+      var dateCheck2 = dateCheck.slice(5,10);
+      
+      if (dateCheck2 = '12-25'){
+        alert("Christmas is a busy day, hold fee required. $10 cancellation fee");
+      }
+      else if (dateCheck2 = '07-04'){
+          alert("Fourth of July is a busy, hold fee required. $10 cancellation fee");
+      }
+      else return 0;
+  };
+
   return (
     <div>
     {employeeList.map((value, key) => {
     return (
       <div key={key} className="post">
-        <div>
-          <h3>NAME: </h3>
-          <h3>PHONE: </h3>
-          <h3>EMAIL: </h3>
-          <h3>DATETIME: </h3>
-          <h3>GUESTS: </h3>
-        </div>
         <body styles="background-color:powderblue;">
-        <h1>UPDATE BELOW</h1>
+        <h1>Make Reservation</h1>
         </body>
         <div>
         <input
@@ -117,6 +124,7 @@ function Reservation2() {
         <button
           onClick={() => {
             createNewReservation();
+            checkBusyDate();
           }}>
           SUBMIT
         </button>

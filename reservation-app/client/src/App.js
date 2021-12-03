@@ -70,13 +70,14 @@ let currentUser = authState.username;
     currentUser=="guest" ? (
     <>
       <Link to="/"> Home Page</Link>
-      <Link to="/createpost"> Create A Reservation </Link>
-      <Link to="/createreservations"> Create a Reservation </Link>
+      {/* <Link to="/createpost"> Create A Reservation </Link> */}
+      {/* <Link to="/createreservations"> Create a Reservation </Link> */}
+        <Route path="/createreservation2" exact component={CreateReservation2} />
     </>
   ) : (
     <>
       <Link to="/"> Home Page</Link>
-      <Link to="/createpost"> Create A Reservation</Link>
+      {/* <Link to="/createpost"> Create A Reservation</Link> */}
       <Link to="/account"> Account</Link>
       <Link to="/createreservation2"> New Reservation </Link>
       <Link to="/reservations"> My Reservations</Link>
@@ -90,7 +91,7 @@ let currentUser = authState.username;
           </div>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/createpost" exact component={CreatePost} />
+            {/* <Route path="/createpost" exact component={CreatePost} /> */}
             <Route path="/registration" exact component={Registration} />
             <Route path="/login" exact component={Login} />
             <Route path="/profile/:id" exact component={Profile} />
